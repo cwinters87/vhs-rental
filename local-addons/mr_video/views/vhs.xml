@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id='vhs_movie_action' model='ir.actions.act_window'>
+        <field name="name">VHS Movies</field>
+        <field name="res_model">vhs.movie</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Mr. Video" id="vhs_base_menu" />
+    <menuitem name="Movies" id="vhs_movie_menu" parent="vhs_base_menu" action="vhs_movie_action"/>
+
+    <!-- Form View -->
+    <record id="vhs_movie_view_form" model="ir.ui.view">
+        <field name="name">VHS Movie Form</field>
+        <field name="model">vhs.movie</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="make_available" string="Make Available" type="object"/>
+                    <button name="make_rented"  string="Make Rented" type="object"/>
+                    <button name="make_lost"  string="Make Lost" type="object"/>
+                    <button name="create_categories" string="Create Categories" type="object"/>
+                    <button name="change_update_date" string="Update Date" type="object"/>
+                    <button name="find_movie" string="Find Movie" type="object"/>
+                    <button name="filter_movies" string="Filter Movie " type="object"/>
+                    <button name="mapped_movies" string="Mapped directors " type="object"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <group>
+                    <group>
+                        <field name="name"/>
+                        <field name="director_ids" widget="many2many_tags"/>
+                    </group>
+                    <group>
+                        <field name="category_id"/>
+                        <field name="date_release"/>
+                        <field name="date_updated"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="vhs_movie_view_tree" model="ir.ui.view">
+        <field name="name">VHS Movie List</field>
+        <field name="model">vhs.movie</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="date_release"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="vhs_movie_view_search" model="ir.ui.view">
+        <field name="name">VHS Movie Search</field>
+        <field name="model">vhs.movie</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="director_ids"/>
+                <filter string="Without Directors" name="without_director" domain="[('director_ids','=',False)]"/>
+            </search>
+        </field>
+    </record>
+
+</odoo>

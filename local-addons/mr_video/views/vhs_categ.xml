@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id='vhs_movie_category_action' model='ir.actions.act_window'>
+        <field name="name">Movie Categories</field>
+        <field name="res_model">vhs.movie.category</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Movie Categories" id="vhs_movie_category_menu" parent="vhs_base_menu" action="vhs_movie_category_action"/>
+
+    <!-- Form View -->
+    <record id="vhs_movie_category_view_form" model="ir.ui.view">
+        <field name="name">VHS Categories Form</field>
+        <field name="model">vhs.movie.category</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                    </group>
+                    <group>
+                        <field name="parent_id"/>
+                    </group>
+                </group>
+                <group>
+                    <field name="child_ids"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="vhs_movie_category_view_tree" model="ir.ui.view">
+        <field name="name">VHS Movie List</field>
+        <field name="model">vhs.movie.category</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+</odoo>

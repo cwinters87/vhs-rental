@@ -1,2 +1,5 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_mr_video_mr_video,mr_video.mr_video,model_mr_video_mr_video,,1,0,0,0
+id	name	model_id:id	group_id:id	perm_read	perm_write	perm_create	perm_unlink
+acl_movie	vhs.movie_default	model_vhs_movie		1	0	0	0
+acl_movie_clerk	vhs.movie_clerk	model_vhs_movie	group_clerk	1	1	1	1
+acl_movie_category	vhs.movie_category_default	model_vhs_movie_category		1	0	0	0
+acl_movie_category_clerk	vhs.movie_category_clerk	model_vhs_movie_category	group_clerk	1	1	1	1

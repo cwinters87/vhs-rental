@@ -10,9 +10,10 @@
     'depends': ['base'],
     # This data files will be loaded at the installation (commented becaues file is not added in this example)
     'data': [
-        # 'security/ir.model.access.csv',
-        'views/views.xml',
-        'views/templates.xml'
+        'security/groups.xml',
+        'security/ir.model.access.csv',
+        'views/vhs.xml',
+        'views/vhs_categ.xml'
     ],
     # This demo data files will be loaded if db initialize with demo data (commented becaues file is not added in this example)
     # 'demo': [
