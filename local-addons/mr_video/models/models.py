@@ -2,8 +2,8 @@
 
 from odoo import models, fields, api
 
-# class my_module(models.Model):
-#     _name = 'my_module.my_module'
+# class mr_video(models.Model):
+#     _name = 'mr_video.mr_video'
 
 #     name = fields.Char()
 #     value = fields.Integer()
