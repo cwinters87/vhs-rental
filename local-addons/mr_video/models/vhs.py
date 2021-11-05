@@ -15,15 +15,19 @@ class VhsMovie(models.Model):
 
     name = fields.Char('Title', required=True)
     date_release = fields.Date('Release Date')
-    date_updated = fields.Datetime('Last Updated', copy=False)
-    director_ids = fields.Many2many('res.partner', string='Directors')
-    genre_id = fields.Many2one('vhs.movie.genre', string='Genre')
+    # date_updated = fields.Datetime('Last Updated', copy=False)
+    # director_ids = fields.Many2many('res.partner', string='Directors')
+    director = fields.Char('Director')
+    genre = fields.Char('Genre')
+    # genre_id = fields.Many2one('vhs.movie.genre', string='Genre')
     state = fields.Selection([
         ('draft', 'Unavailable'),
         ('available', 'Available'),
         ('rented', 'Rented'),
         ('lost', 'Lost')],
         'State', default="draft")
+    
+    quantity = fields.Integer('Amount in Stock')
 
     @api.model
     def is_allowed_transition(self, old_state, new_state):
@@ -53,78 +57,78 @@ class VhsMovie(models.Model):
     def make_lost(self):
         self.change_state('lost')
 
-    def create_genres(self):
-        categ1 = {
-            'name': 'Child genre 1',
-            'description': 'Description for child 1'
-        }
-        categ2 = {
-            'name': 'Child genre 2',
-            'description': 'Description for child 2'
-        }
-        parent_genre_val = {
-            'name': 'Parent genre',
-            'email': 'Description for parent genre',
-            'child_ids': [
-                (0, 0, categ1),
-                (0, 0, categ2),
-            ]
-        }
+    # def create_genres(self):
+    #     categ1 = {
+    #         'name': 'Child genre 1',
+    #         'description': 'Description for child 1'
+    #     }
+    #     categ2 = {
+    #         'name': 'Child genre 2',
+    #         'description': 'Description for child 2'
+    #     }
+    #     parent_genre_val = {
+    #         'name': 'Parent genre',
+    #         'email': 'Description for parent genre',
+    #         'child_ids': [
+    #             (0, 0, categ1),
+    #             (0, 0, categ2),
+    #         ]
+    #     }
         # Total 3 records (1 parent and 2 child) will be craeted in vhs.movie.genre model
-        record = self.env['vhs.movie.genre'].create(parent_genre_val)
-        return True
+        # record = self.env['vhs.movie.genre'].create(parent_genre_val)
+        # return True
 
-    @api.multi
-    def change_update_date(self):
-        self.ensure_one()
-        self.date_updated = fields.Datetime.now()
+    # @api.multi
+    # def change_update_date(self):
+    #     self.ensure_one()
+    #     self.date_updated = fields.Datetime.now()
 
-    @api.multi
-    def find_movie(self):
-        domain = [
-            '|',
-                '&', ('name', 'ilike', 'Movie Name'),
-                     ('genre_id.name', '=', 'Genre Name'),
-                '&', ('name', 'ilike', 'Movie Name 2'),
-                     ('genre_id.name', '=', 'Genre Name 2')
-        ]
-        movies = self.search(domain)
-        logger.info('Movies found: %s', movies)
-        return True
+    # @api.multi
+    # def find_movie(self):
+    #     domain = [
+    #         '|',
+    #             '&', ('name', 'ilike', 'Movie Name'),
+    #                  ('genre_id.name', '=', 'Genre Name'),
+    #             '&', ('name', 'ilike', 'Movie Name 2'),
+    #                  ('genre_id.name', '=', 'Genre Name 2')
+    #     ]
+    #     movies = self.search(domain)
+    #     logger.info('Movies found: %s', movies)
+    #     return True
 
-    @api.model
-    def get_all_vhs_members(self):
-        vhs_member_model = self.env['vhs.member']  # This is an empty recordset of model vhs.member
-        return vhs_member_model.search([])
+    # @api.model
+    # def get_all_vhs_members(self):
+    #     vhs_member_model = self.env['vhs.member']  # This is an empty recordset of model vhs.member
+    #     return vhs_member_model.search([])
 
-    def filter_movies(self):
-        all_movies = self.search([])
-        filtered_movies = self.movies_with_multiple_directors(all_movies)
-        logger.info('Filtered Movies: %s', filtered_movies)
+    # def filter_movies(self):
+    #     all_movies = self.search([])
+    #     filtered_movies = self.movies_with_multiple_directors(all_movies)
+    #     logger.info('Filtered Movies: %s', filtered_movies)
 
-    @api.model
-    def movies_with_multiple_directors(self, all_movies):
-        def predicate(movie):
-            if len(movie.director_ids) > 1:
-                return True
-        return all_movies.filtered(predicate)
+    # @api.model
+    # def movies_with_multiple_directors(self, all_movies):
+    #     def predicate(movie):
+    #         if len(movie.director) > 1:
+    #             return True
+    #     return all_movies.filtered(predicate)
 
-    def mapped_movies(self):
-        all_movies = self.search([])
-        movies_directors = self.get_director_names(all_movies)
-        logger.info('Movies Director: %s', movies_directors)
+    # def mapped_movies(self):
+    #     all_movies = self.search([])
+    #     movies_directors = self.get_director_names(all_movies)
+    #     logger.info('Movies Director: %s', movies_directors)
 
     @api.model
     def get_director_names(self, all_movies):
         return all_movies.mapped('director_ids.name')
 
 
-class VhsMember(models.Model):
-    _name = 'vhs.member'
-    _inherits = {'res.partner': 'partner_id'}
+# class VhsMember(models.Model):
+#     _name = 'vhs.member'
+#     _inherits = {'res.partner': 'partner_id'}
 
-    partner_id = fields.Many2one('res.partner', ondelete='cascade')
-    date_start = fields.Date('Member Since')
-    date_end = fields.Date('Termination Date')
-    member_number = fields.Char()
-    date_of_birth = fields.Date('Date of birth')
+#     partner_id = fields.Many2one('res.partner', ondelete='cascade')
+#     date_start = fields.Date('Member Since')
+#     date_end = fields.Date('Termination Date')
+#     member_number = fields.Char()
+#     date_of_birth = fields.Date('Date of birth')

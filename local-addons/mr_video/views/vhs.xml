@@ -21,22 +21,24 @@
                     <button name="make_available" string="Make Available" type="object"/>
                     <button name="make_rented"  string="Make Rented" type="object"/>
                     <button name="make_lost"  string="Make Lost" type="object"/>
-                    <button name="create_genres" string="Create Genres" type="object"/>
-                    <button name="change_update_date" string="Update Date" type="object"/>
-                    <button name="find_movie" string="Find Movie" type="object"/>
-                    <button name="filter_movies" string="Filter Movie " type="object"/>
-                    <button name="mapped_movies" string="Mapped directors " type="object"/>
+                    <!-- <button name="create_genres" string="Create Genres" type="object"/> -->
+                    <!-- <button name="change_update_date" string="Update Date" type="object"/> -->
+                    <!-- <button name="find_movie" string="Find Movie" type="object"/> -->
+                    <!-- <button name="filter_movies" string="Filter Movie " type="object"/> -->
+                    <!-- <button name="mapped_movies" string="Mapped directors " type="object"/> -->
                     <field name="state" widget="statusbar"/>
                 </header>
                 <group>
                     <group>
                         <field name="name"/>
-                        <field name="director_ids" widget="many2many_tags"/>
+                        <!-- <field name="director" widget="many2many_tags"/> -->
+                        <field name="director"/>
                     </group>
                     <group>
-                        <field name="genre_id"/>
+                        <field name="genre"/>
                         <field name="date_release"/>
-                        <field name="date_updated"/>
+                        <field name="quantity" />
+                        <!-- <field name="date_updated"/> -->
                     </group>
                 </group>
             </form>
@@ -50,7 +52,10 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="name"/>
+                <field name="genre"/>
+                <field name="director"/>
                 <field name="date_release"/>
+                <field name="quantity" />
             </tree>
         </field>
     </record>
@@ -62,8 +67,8 @@
         <field name="arch" type="xml">
             <search>
                 <field name="name"/>
-                <field name="director_ids"/>
-                <filter string="Without Directors" name="without_director" domain="[('director_ids','=',False)]"/>
+                <field name="director"/>
+                <!-- <filter string="Without Directors" name="without_director" domain="[('director','=',False)]"/> -->
             </search>
         </field>
     </record>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id='member_action' model='ir.actions.act_window'>
+        <field name="name">Members</field>
+        <field name="res_model">member</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Mr. Video" id="vhs_base_menu" />
+    <menuitem name="Members" id="member_menu" parent="vhs_base_menu" action="member_action"/>
+
+    <!-- Form View -->
+    <record id="member_view_form" model="ir.ui.view">
+        <field name="name">Member Form</field>
+        <field name="model">member</field>
+        <field name="arch" type="xml">
+            <form>
+                <!-- <header>
+                    <button name="make_available" string="Make Available" type="object"/>
+                    <button name="make_rented"  string="Make Rented" type="object"/>
+                    <button name="make_lost"  string="Make Lost" type="object"/>
+                    <button name="create_genres" string="Create Genres" type="object"/>
+                    <button name="change_update_date" string="Update Date" type="object"/>
+                    <button name="find_movie" string="Find Movie" type="object"/>
+                    <button name="filter_movies" string="Filter Movie " type="object"/>
+                    <button name="mapped_movies" string="Mapped directors " type="object"/>
+                    <field name="state" widget="statusbar"/>
+                </header> -->
+                <group>
+                    <group>
+                        <field name="first_name"/>
+                        <field name="last_name"/>
+                    </group>
+                    <group>
+                        <field name="phone_number"/>
+                        <field name="email"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="member_view_tree" model="ir.ui.view">
+        <field name="name">Member List</field>
+        <field name="model">member</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="first_name"/>
+                <field name="last_name"/>
+                <field name="phone_number"/>
+                <field name="email"/>
+            </tree>
+        </field>
+    </record>
+
+
+</odoo>

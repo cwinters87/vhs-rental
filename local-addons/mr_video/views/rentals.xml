@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id='rentals_action' model='ir.actions.act_window'>
+        <field name="name">VHS Rentals</field>
+        <field name="res_model">rental</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Mr. Video" id="vhs_base_menu" />
+    <menuitem name="Rentals" id="rental_menu" parent="vhs_base_menu" action="rentals_action"/>
+
+    <!-- Form View -->
+    <record id="rental_view_form" model="ir.ui.view">
+        <field name="name">VHS Rental Form</field>
+        <field name="model">rental</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="renter"/>                        
+                        <field name="vhs_rental"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="vhs_movie_view_tree" model="ir.ui.view">
+        <field name="name">VHS Movie List</field>
+        <field name="model">vhs.movie</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="genre"/>
+                <field name="director"/>
+                <field name="date_release"/>
+                <field name="quantity" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="vhs_movie_view_search" model="ir.ui.view">
+        <field name="name">VHS Movie Search</field>
+        <field name="model">vhs.movie</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="director"/>
+                <!-- <filter string="Without Directors" name="without_director" domain="[('director','=',False)]"/> -->
+            </search>
+        </field>
+    </record>
+
+</odoo>

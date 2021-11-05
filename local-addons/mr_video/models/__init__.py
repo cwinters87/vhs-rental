@@ -1,4 +1,4 @@
 # -*- coding: utf-8 -*-
 from . import vhs
-from . import vhs_categ
-from . import customer
+from . import members
+from . import rentals
