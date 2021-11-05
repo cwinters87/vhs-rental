@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <record id='vhs_movie_category_action' model='ir.actions.act_window'>
-        <field name="name">Movie Categories</field>
-        <field name="res_model">vhs.movie.category</field>
+    <record id='vhs_movie_genre_action' model='ir.actions.act_window'>
+        <field name="name">Movie Genres</field>
+        <field name="res_model">vhs.movie.genre</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <menuitem name="Movie Categories" id="vhs_movie_category_menu" parent="vhs_base_menu" action="vhs_movie_category_action"/>
+    <menuitem name="Movie Genres" id="vhs_movie_genre_menu" parent="vhs_base_menu" action="vhs_movie_genre_action"/>
 
     <!-- Form View -->
-    <record id="vhs_movie_category_view_form" model="ir.ui.view">
-        <field name="name">VHS Categories Form</field>
-        <field name="model">vhs.movie.category</field>
+    <record id="vhs_movie_genre_view_form" model="ir.ui.view">
+        <field name="name">VHS Genres Form</field>
+        <field name="model">vhs.movie.genre</field>
         <field name="arch" type="xml">
             <form>
                 <group>
@@ -33,9 +33,9 @@
     </record>
 
     <!-- Tree(list) View -->
-    <record id="vhs_movie_category_view_tree" model="ir.ui.view">
+    <record id="vhs_movie_genre_view_tree" model="ir.ui.view">
         <field name="name">VHS Movie List</field>
-        <field name="model">vhs.movie.category</field>
+        <field name="model">vhs.movie.genre</field>
         <field name="arch" type="xml">
             <tree>
                 <field name="name"/>

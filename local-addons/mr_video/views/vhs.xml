@@ -21,7 +21,7 @@
                     <button name="make_available" string="Make Available" type="object"/>
                     <button name="make_rented"  string="Make Rented" type="object"/>
                     <button name="make_lost"  string="Make Lost" type="object"/>
-                    <button name="create_categories" string="Create Categories" type="object"/>
+                    <button name="create_genres" string="Create Genres" type="object"/>
                     <button name="change_update_date" string="Update Date" type="object"/>
                     <button name="find_movie" string="Find Movie" type="object"/>
                     <button name="filter_movies" string="Filter Movie " type="object"/>
@@ -34,7 +34,7 @@
                         <field name="director_ids" widget="many2many_tags"/>
                     </group>
                     <group>
-                        <field name="category_id"/>
+                        <field name="genre_id"/>
                         <field name="date_release"/>
                         <field name="date_updated"/>
                     </group>

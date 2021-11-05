@@ -3,26 +3,26 @@ from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 
 
-class MovieCategory(models.Model):
-    _name = 'vhs.movie.category'
+class MovieGenre(models.Model):
+    _name = 'vhs.movie.genre'
 
     _parent_store = True
     _parent_name = "parent_id"  # optional if field is 'parent_id'
 
-    name = fields.Char('Category')
+    name = fields.Char('Genre')
     description = fields.Text('Description')
     parent_id = fields.Many2one(
-        'vhs.movie.category',
-        string='Parent Category',
+        'vhs.movie.genre',
+        string='Parent Genre',
         ondelete='restrict',
         index=True
     )
     child_ids = fields.One2many(
-        'vhs.movie.category', 'parent_id',
-        string='Child Categories')
+        'vhs.movie.genre', 'parent_id',
+        string='Child Genres')
     parent_path = fields.Char(index=True)
 
     @api.constrains('parent_id')
     def _check_hierarchy(self):
         if not self._check_recursion():
-            raise models.ValidationError('Error! You cannot create recursive categories.')
+            raise models.ValidationError('Error! You cannot create recursive genres.')

@@ -17,7 +17,7 @@ class VhsMovie(models.Model):
     date_release = fields.Date('Release Date')
     date_updated = fields.Datetime('Last Updated', copy=False)
     director_ids = fields.Many2many('res.partner', string='Directors')
-    category_id = fields.Many2one('vhs.movie.category', string='Category')
+    genre_id = fields.Many2one('vhs.movie.genre', string='Genre')
     state = fields.Selection([
         ('draft', 'Unavailable'),
         ('available', 'Available'),
@@ -53,25 +53,25 @@ class VhsMovie(models.Model):
     def make_lost(self):
         self.change_state('lost')
 
-    def create_categories(self):
+    def create_genres(self):
         categ1 = {
-            'name': 'Child category 1',
+            'name': 'Child genre 1',
             'description': 'Description for child 1'
         }
         categ2 = {
-            'name': 'Child category 2',
+            'name': 'Child genre 2',
             'description': 'Description for child 2'
         }
-        parent_category_val = {
-            'name': 'Parent category',
-            'email': 'Description for parent category',
+        parent_genre_val = {
+            'name': 'Parent genre',
+            'email': 'Description for parent genre',
             'child_ids': [
                 (0, 0, categ1),
                 (0, 0, categ2),
             ]
         }
-        # Total 3 records (1 parent and 2 child) will be craeted in vhs.movie.category model
-        record = self.env['vhs.movie.category'].create(parent_category_val)
+        # Total 3 records (1 parent and 2 child) will be craeted in vhs.movie.genre model
+        record = self.env['vhs.movie.genre'].create(parent_genre_val)
         return True
 
     @api.multi
@@ -84,9 +84,9 @@ class VhsMovie(models.Model):
         domain = [
             '|',
                 '&', ('name', 'ilike', 'Movie Name'),
-                     ('category_id.name', '=', 'Category Name'),
+                     ('genre_id.name', '=', 'Genre Name'),
                 '&', ('name', 'ilike', 'Movie Name 2'),
-                     ('category_id.name', '=', 'Category Name 2')
+                     ('genre_id.name', '=', 'Genre Name 2')
         ]
         movies = self.search(domain)
         logger.info('Movies found: %s', movies)
