@@ -37,6 +37,9 @@
                         <field name="phone_number"/>
                         <field name="email"/>
                     </group>
+                    <group>
+                        <field name="is_bad_member"/>
+                    </group>                    
                 </group>
             </form>
         </field>
@@ -52,7 +55,20 @@
                 <field name="last_name"/>
                 <field name="phone_number"/>
                 <field name="email"/>
+                <field name="is_bad_member"/>
             </tree>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="member_view_search" model="ir.ui.view">
+        <field name="name">VHS Member Search</field>
+        <field name="model">member</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <!-- <filter string="Without Directors" name="without_director" domain="[('director','=',False)]"/> -->
+            </search>
         </field>
     </record>
 

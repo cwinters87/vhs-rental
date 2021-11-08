@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 class VhsMovie(models.Model):
     _name = 'vhs.movie'
-    _description = 'VHS movie'
+    _description = 'Mr Video VHS Movies'
 
     name = fields.Char('Title', required=True)
     date_release = fields.Date('Release Date')
@@ -20,6 +20,13 @@ class VhsMovie(models.Model):
     director = fields.Char('Director')
     genre = fields.Char('Genre')
     # genre_id = fields.Many2one('vhs.movie.genre', string='Genre')
+    poster =fields.Binary(string='Movie Poster')
+    
+    # category = fields.Selection([
+    #     ('contract', 'Contract'),
+    #     ('service', 'Service')
+    #     ], 'Category', required=True)
+    
     state = fields.Selection([
         ('draft', 'Unavailable'),
         ('available', 'Available'),
@@ -27,7 +34,7 @@ class VhsMovie(models.Model):
         ('lost', 'Lost')],
         'State', default="draft")
     
-    quantity = fields.Integer('Amount in Stock')
+    quantity = fields.Integer('Amount in Stock', required=True)
 
     @api.model
     def is_allowed_transition(self, old_state, new_state):
@@ -132,3 +139,8 @@ class VhsMovie(models.Model):
 #     date_end = fields.Date('Termination Date')
 #     member_number = fields.Char()
 #     date_of_birth = fields.Date('Date of birth')
+
+def my_function():
+  print("Hello from a function")
+
+my_function()

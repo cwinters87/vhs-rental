@@ -19,8 +19,13 @@
             <form>
                 <group>
                     <group>
-                        <field name="renter"/>                        
+                        <field name="name"/>                        
                         <field name="vhs_rental"/>
+                        <field name="check_out"/>
+                        
+                    </group>
+                    <group>
+                        <field name="is_returned"/>                        
                     </group>
                 </group>
             </form>
@@ -28,28 +33,25 @@
     </record>
 
     <!-- Tree(list) View -->
-    <record id="vhs_movie_view_tree" model="ir.ui.view">
-        <field name="name">VHS Movie List</field>
-        <field name="model">vhs.movie</field>
+    <record id="rental_view_tree" model="ir.ui.view">
+        <field name="name">VHS Rental List</field>
+        <field name="model">rental</field>
         <field name="arch" type="xml">
             <tree>
                 <field name="name"/>
-                <field name="genre"/>
-                <field name="director"/>
-                <field name="date_release"/>
-                <field name="quantity" />
+                <field name="vhs_rental"/>
+                <field name="check_out"/>
             </tree>
         </field>
     </record>
 
     <!-- Search View -->
-    <record id="vhs_movie_view_search" model="ir.ui.view">
-        <field name="name">VHS Movie Search</field>
-        <field name="model">vhs.movie</field>
+    <record id="vhs_rental_view_search" model="ir.ui.view">
+        <field name="name">VHS Rental Search</field>
+        <field name="model">rental</field>
         <field name="arch" type="xml">
             <search>
                 <field name="name"/>
-                <field name="director"/>
                 <!-- <filter string="Without Directors" name="without_director" domain="[('director','=',False)]"/> -->
             </search>
         </field>
