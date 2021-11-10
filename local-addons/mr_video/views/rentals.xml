@@ -21,11 +21,11 @@
                     <group>
                         <field name="name"/>                        
                         <field name="vhs_rental"/>
-                        <field name="check_out"/>
-                        
+                        <field name="check_out_date"/>                        
                     </group>
                     <group>
-                        <field name="is_returned"/>                        
+                        <field name="is_returned"/> 
+                        <field name="rent_selected"/>                       
                     </group>
                 </group>
             </form>
@@ -40,7 +40,8 @@
             <tree>
                 <field name="name"/>
                 <field name="vhs_rental"/>
-                <field name="check_out"/>
+                <field name="check_out_date"/>
+                <field name="rent_selected"/>
             </tree>
         </field>
     </record>

@@ -18,27 +18,26 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="make_available" string="Make Available" type="object"/>
-                    <button name="make_borrowed"  string="Make Borrowed" type="object"/>
-                    <button name="make_lost"  string="Make Lost" type="object"/>
-                    <button name="create_categories" string="Create Categories" type="object"/>
-                    <button name="change_update_date" string="Update Date" type="object"/>
-                    <button name="find_book" string="Find Book" type="object"/>
-                    <button name="filter_books" string="Filter Book " type="object"/>
-                    <button name="mapped_books" string="Mapped authors " type="object"/>
+                    <button name="book_rent" string="Rent this book" type="object" class="btn-primary"/>
+                    <button name="make_available" string="Make Available" type="object" />
+                    <button name="make_borrowed" string="Make Borrowed" type="object" />
+                    <button name="make_lost" string="Make Lost" type="object" />
                     <field name="state" widget="statusbar"/>
                 </header>
-                <group>
+                <sheet>
                     <group>
-                        <field name="name"/>
-                        <field name="author_ids" widget="many2many_tags"/>
+                        <group>
+                            <field name="name"/>
+                            <field name="category_id"/>
+                            <field name="cost_price"/>
+                        </group>
+                        <group>
+                            <field name="date_release"/>
+                            <field name="active"/>
+                            <field name="author_ids" widget="many2many_tags"/>
+                        </group>
                     </group>
-                    <group>
-                        <field name="category_id"/>
-                        <field name="date_release"/>
-                        <field name="date_updated"/>
-                    </group>
-                </group>
+                </sheet>
             </form>
         </field>
     </record>
