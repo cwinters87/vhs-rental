@@ -1,4 +1,3 @@
-from typing_extensions import Required
 from odoo import models, fields, api
 from . import vhs
 
@@ -22,9 +21,9 @@ class Rental(models.Model):
     
     check_out_date = fields.Datetime(string="Checked Out", default=fields.Datetime.now, required=True)
     
-    is_returned = fields.Boolean('Returned', default=False)
+    # is_returned = fields.Boolean('Returned', default=False)
     
-    rent_selected = fields.Boolean('Rent selected VHS', default=False, required=True)
+    rent_selected = fields.Boolean('Out for Rent', default=False, required=True)
     
     @api.onchange('rent_selected')
     def check_rented_true(self):
@@ -37,8 +36,33 @@ class Rental(models.Model):
                     print(item.name)
                     print(item.quantity)
                 # Credit to Eric for below code
+                rec.vhs_rental= [(6, 0, ids)]
+        else:
+            ids = []
+            for rec in self:
+                for item in rec.vhs_rental:
+                    ids.append(item.id)
+                    item.write({"quantity": item.quantity +1})
+                    print(item.name)
+                    print(item.quantity)
+                # Credit to Eric for below code
                 rec.vhs_rental= [(6, 0, ids)] 
-                    
+                
+    
+    # @api.onchange('is_returned')
+    # def check_rented_true(self):
+    #     if self.is_returned == True:
+    #         ids = []
+    #         for rec in self:
+    #             for item in rec.vhs_rental:
+    #                 ids.append(item.id)
+    #                 item.write({"quantity": item.quantity +1})
+    #                 print(item.name)
+    #                 print(item.quantity)
+    #             # Credit to Eric for below code
+    #             rec.vhs_rental= [(6, 0, ids)]
+
+        
                     
 # print(self.env['vhs.movie'].search([('id', '=', )]))
             

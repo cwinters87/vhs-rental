@@ -23,8 +23,7 @@
                         <field name="vhs_rental"/>
                         <field name="check_out_date"/>                        
                     </group>
-                    <group>
-                        <field name="is_returned"/> 
+                    <group> 
                         <field name="rent_selected"/>                       
                     </group>
                 </group>
