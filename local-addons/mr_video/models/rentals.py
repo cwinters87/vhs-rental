@@ -1,6 +1,7 @@
 from dateutil.relativedelta import relativedelta
 from datetime import datetime, timedelta
-from odoo import models, fields, api
+from odoo import models, fields, api, exceptions
+
 
 class Rental(models.Model):
     _name = 'rental'
@@ -63,13 +64,18 @@ class Rental(models.Model):
             for rec in self:
                 for item in rec.name:
                     item.write({"is_bad_member": True})
-        else:
-            for rec in self:
-                for item in rec.name:
-                    item.write({"is_bad_member": False})
+        # else:
+        #     for rec in self:
+        #         for item in rec.name:
+        #             item.write({"is_bad_member": False})
      
      
     @api.onchange('check_out_date')
-    def my_function(self):
-        print("Hello from a function")
+    def overdue_check(self):
         self.check_overdue()
+        
+    @api.onchange('name')
+    def verify_bad_member(self):
+        for rec in self:
+            if rec.env['member'].search([('id', '=', rec.name.id)]).is_bad_member:
+                raise exceptions.Warning('{} is a bad member. Get good'.format(rec.name.name))
