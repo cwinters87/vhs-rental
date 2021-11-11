@@ -22,6 +22,8 @@ class Member(models.Model):
         compute='_get_name'
     )
     
+    history = fields.One2many('rental', string='Rental Records', compute='get_history', readonly=True)
+    
     @api.depends('first_name', 'last_name')
     def _get_name(self):
      for rec in self:
@@ -34,8 +36,15 @@ class Member(models.Model):
         member_model = self.env['member']  # This is an empty recordset of model vhs.member
         return member_model.search([])
     
-    
-    
+    @api.multi
+    def get_history(self):
+        ids = []
+        for rec in self:
+            history_records = rec.env['rental'].search([('name', '=', rec.name)])
+            for recs in history_records:
+                ids.append(recs.id)
+                
+        rec.history = [(6, 0, ids)]
     
 
     # partner_id = fields.Many2one('res.partner', ondelete='cascade')

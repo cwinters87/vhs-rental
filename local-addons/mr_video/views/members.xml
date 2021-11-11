@@ -39,6 +39,7 @@
                     </group>
                     <group>
                         <field name="is_bad_member"/>
+                        <field name="history"/>
                     </group>                    
                 </group>
             </form>
@@ -56,6 +57,7 @@
                 <field name="phone_number"/>
                 <field name="email"/>
                 <field name="is_bad_member"/>
+                <field name="history"/>
             </tree>
         </field>
     </record>
