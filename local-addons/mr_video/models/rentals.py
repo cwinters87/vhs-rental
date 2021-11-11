@@ -1,7 +1,5 @@
-from dateutil.relativedelta import relativedelta
 from datetime import datetime, timedelta
 from odoo import models, fields, api, exceptions
-
 
 class Rental(models.Model):
     _name = 'rental'
@@ -9,18 +7,13 @@ class Rental(models.Model):
  
     name = fields.Many2one(
         'member', string='Member'
-    )
-    
+    )    
     vhs_rental = fields.Many2many(
         'vhs.movie', domain=[('quantity', '>', 0)], string='VHS rented'
-    )    
-    
-    check_out_date = fields.Datetime(string="Checked Out", default=fields.Datetime.now, required=True)
-    
-    return_date = fields.Datetime(compute='get_return_date')
-    
-    rent_selected = fields.Boolean('Out for Rent', default=False, required=True)
-    
+    )       
+    check_out_date = fields.Datetime(string="Checked Out", default=fields.Datetime.now, required=True)    
+    return_date = fields.Datetime(compute='get_return_date')    
+    rent_selected = fields.Boolean('Out for Rent', default=False, required=True)    
     is_due = fields.Boolean('Due', default=False)
     
     @api.onchange('rent_selected')
@@ -63,12 +56,7 @@ class Rental(models.Model):
         if self.is_due == True:
             for rec in self:
                 for item in rec.name:
-                    item.write({"is_bad_member": True})
-        # else:
-        #     for rec in self:
-        #         for item in rec.name:
-        #             item.write({"is_bad_member": False})
-     
+                    item.write({"is_bad_member": True})     
      
     @api.onchange('check_out_date')
     def overdue_check(self):
