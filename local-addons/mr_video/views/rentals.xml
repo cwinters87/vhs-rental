@@ -22,7 +22,8 @@
                         <field name="name"/>                        
                         <field name="vhs_rental"/>
                         <field name="check_out_date"/>
-                        <!-- <field name="return_date"/>                         -->
+                        <!-- <field name="return_date"/> -->
+                        <field name="is_due"/>                        
                     </group>
                     <group> 
                         <field name="rent_selected"/>                       
@@ -43,6 +44,7 @@
                 <field name="check_out_date"/>
                 <!-- <field name="return_date"/> -->
                 <field name="rent_selected"/>
+                <field name="is_due"/>
             </tree>
         </field>
     </record>

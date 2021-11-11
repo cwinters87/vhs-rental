@@ -20,6 +20,8 @@ class Rental(models.Model):
     
     rent_selected = fields.Boolean('Out for Rent', default=False, required=True)
     
+    is_due = fields.Boolean('Due', default=False)
+    
     @api.onchange('rent_selected')
     def check_rented_true(self):
         if self.rent_selected == True:
@@ -46,3 +48,28 @@ class Rental(models.Model):
     @api.depends('check_out_date')
     def get_return_date(self):
         self.return_date = self.check_out_date + timedelta(hours=48)
+        
+    @api.depends('return_date')
+    def check_overdue(self):
+        for rec in self:
+            if datetime.now() > rec.return_date:
+                rec.is_due = True
+            else:
+                rec.is_due = False
+                
+    @api.onchange('is_due')
+    def check_bad_member(self):
+        if self.is_due == True:
+            for rec in self:
+                for item in rec.name:
+                    item.write({"is_bad_member": True})
+        else:
+            for rec in self:
+                for item in rec.name:
+                    item.write({"is_bad_member": False})
+     
+     
+    @api.onchange('check_out_date')
+    def my_function(self):
+        print("Hello from a function")
+        self.check_overdue()
