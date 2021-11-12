@@ -26,7 +26,7 @@ class Rental(models.Model):
                     item.write({"quantity": item.quantity -1})
                     print(item.name)
                     print(item.quantity)
-                # Credit to Eric for below code
+                # Credit to Erik for below code
                 rec.vhs_rental= [(6, 0, ids)]
         else:
             ids = []
@@ -36,7 +36,7 @@ class Rental(models.Model):
                     item.write({"quantity": item.quantity +1})
                     print(item.name)
                     print(item.quantity)
-                # Credit to Eric for below code
+                # Credit to Erik for below code
                 rec.vhs_rental= [(6, 0, ids)] 
                 
     @api.depends('check_out_date')
