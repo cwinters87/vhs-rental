@@ -2,3 +2,4 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_vhs.movie,access.vhs.movie,model_vhs_movie,group_clerk,1,1,1,1
 access_member,access.member,model_member,group_clerk,1,1,1,1
 access_rental,access.rental,model_rental,group_clerk,1,1,1,1
+access_vhs.movie,access.vhs.movie,model_vhs_movie,group_member,1,0,0,0

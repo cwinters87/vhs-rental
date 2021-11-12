@@ -13,7 +13,7 @@ class Rental(models.Model):
     )       
     check_out_date = fields.Datetime(string="Checked Out", default=fields.Datetime.now, required=True)    
     return_date = fields.Datetime(compute='get_return_date')    
-    rent_selected = fields.Boolean('Out for Rent', default=False, required=True)    
+    rent_selected = fields.Boolean('Out for Rent', required=True)    
     is_due = fields.Boolean('Due', default=False)
     
     @api.onchange('rent_selected')
@@ -41,7 +41,8 @@ class Rental(models.Model):
                 
     @api.depends('check_out_date')
     def get_return_date(self):
-        self.return_date = self.check_out_date + timedelta(hours=48)
+        for rec in self:
+            rec.return_date = rec.check_out_date + timedelta(hours=48)
         
     @api.depends('return_date')
     def check_overdue(self):

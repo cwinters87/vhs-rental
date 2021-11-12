@@ -17,17 +17,17 @@
         <field name="model">vhs.movie</field>
         <field name="arch" type="xml">
             <form>
-                <header>
-                    <button name="make_available" string="Make Available" type="object"/>
+                <!-- <header> -->
+                    <!-- <button name="make_available" string="Make Available" type="object"/>
                     <button name="make_rented"  string="Make Rented" type="object"/>
-                    <button name="make_lost"  string="Make Lost" type="object"/>
+                    <button name="make_lost"  string="Make Lost" type="object"/> -->
                     <!-- <button name="create_genres" string="Create Genres" type="object"/> -->
                     <!-- <button name="change_update_date" string="Update Date" type="object"/> -->
                     <!-- <button name="find_movie" string="Find Movie" type="object"/> -->
                     <!-- <button name="filter_movies" string="Filter Movie " type="object"/> -->
                     <!-- <button name="mapped_movies" string="Mapped directors " type="object"/> -->
-                    <field name="state" widget="statusbar"/>
-                </header>
+                    <!-- <field name="state" widget="statusbar"/>
+                </header> -->
                 <group>
                     <group>
                         <field name="name"/>
